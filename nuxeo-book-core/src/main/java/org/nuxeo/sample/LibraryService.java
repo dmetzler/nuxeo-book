@@ -16,35 +16,28 @@
  */
 package org.nuxeo.sample;
 
+import java.util.List;
+
 import org.nuxeo.ecm.core.api.ClientException;
-import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.CoreSession;
 
 /**
  * @author dmetzler
  *
  */
-public interface BookLibrary {
-
-    String DOCTYPE = "BookLibrary";
-
-    public void setTitle(String string) throws ClientException;
+public interface LibraryService {
 
     /**
      * @return
      */
-    public DocumentModel getDoc();
+    List<BookLibrary> getAllLibraries(CoreSession session) throws ClientException;
 
     /**
-     * @param string
+     * @param libraryTitle
+     * @param session
      * @return
      * @throws ClientException
      */
-    public Book addBook(String string) throws ClientException;
-
-    /**
-     * @return
-     * @throws ClientException
-     */
-    public String getTitle() throws ClientException;
+    BookLibrary createLibrary(String libraryTitle, CoreSession session) throws ClientException;
 
 }

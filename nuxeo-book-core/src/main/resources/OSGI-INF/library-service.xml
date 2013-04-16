@@ -1,0 +1,9 @@
+<component name="org.nuxeo.sample.library.service">
+
+
+  <implementation class="org.nuxeo.sample.LibraryComponent" />
+
+  <service>
+    <provide interface="org.nuxeo.sample.LibraryService" />
+  </service>
+</component>

@@ -12,7 +12,7 @@
   <artifactId>nuxeo-book-core</artifactId>
   <name>nuxeo-book-core</name>
   <description>
-    
+
   </description>
 
   <dependencies>
@@ -49,6 +49,12 @@
     <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>osgi-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.easytesting</groupId>
+      <artifactId>fest-assert-core</artifactId>
+      <version>2.0M8</version>
     </dependency>
 
   </dependencies>

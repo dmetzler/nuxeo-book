@@ -17,34 +17,23 @@
 package org.nuxeo.sample;
 
 import org.nuxeo.ecm.core.api.ClientException;
-import org.nuxeo.ecm.core.api.DocumentModel;
 
 /**
  * @author dmetzler
  *
  */
-public interface BookLibrary {
-
-    String DOCTYPE = "BookLibrary";
-
-    public void setTitle(String string) throws ClientException;
-
-    /**
-     * @return
-     */
-    public DocumentModel getDoc();
+public class LibraryException extends ClientException {
 
     /**
      * @param string
-     * @return
-     * @throws ClientException
      */
-    public Book addBook(String string) throws ClientException;
+    public LibraryException(String message) {
+        super(message);
+    }
 
     /**
-     * @return
-     * @throws ClientException
+     *
      */
-    public String getTitle() throws ClientException;
+    private static final long serialVersionUID = 1L;
 
 }
