@@ -1,0 +1,9 @@
+<component name="com.nuxeo.book.adapter.contrib">
+
+  <extension target="org.nuxeo.ecm.core.api.DocumentAdapterService"
+    point="adapters">
+    <adapter class="org.nuxeo.sample.Book" factory="org.nuxeo.sample.BookFactory" />
+    <adapter class="org.nuxeo.sample.BookLibrary" factory="org.nuxeo.sample.BookFactory" />
+  </extension>
+
+</component>

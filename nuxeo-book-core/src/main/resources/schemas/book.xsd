@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://project.nuxeo.org/schemas/book"
+    xmlns:tns="http://project.nuxeo.org/schemas/book">
+
+  <element name="isbn" type="string"/>
+  <element name="author" type="string"/>
+  <element name="publication_date" type="date"/>
+  <element name="rating" type="integer"/>
+</schema>

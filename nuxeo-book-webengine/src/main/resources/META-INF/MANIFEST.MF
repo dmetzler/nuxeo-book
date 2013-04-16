@@ -1,0 +1,10 @@
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Manifest-Version: 1.0
+Bundle-Name: nuxeo-book-webengine
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: Nuxeo
+Bundle-Version: 5.7-I20130307_0116
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: nuxeo-book-webengine
+Nuxeo-WebModule: org.nuxeo.ecm.webengine.app.WebEngineModule;name=library;extends=base;package=org/nuxeo/sample

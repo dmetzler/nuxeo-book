@@ -1,0 +1,11 @@
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Manifest-Version: 1.0
+Bundle-Name: nuxeo-book-core
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: Nuxeo
+Bundle-Version: 5.7-I20130307_0116
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: nuxeo-book-core
+Nuxeo-Component: OSGI-INF/doctypes-contrib.xml,
+ OSGI-INF/adapter-contrib.xml
