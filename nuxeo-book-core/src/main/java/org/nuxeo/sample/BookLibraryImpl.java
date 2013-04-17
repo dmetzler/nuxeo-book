@@ -16,9 +16,14 @@
  */
 package org.nuxeo.sample;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.DocumentModelList;
 
 /**
  * @author dmetzler
@@ -52,6 +57,7 @@ public class BookLibraryImpl implements BookLibrary {
      * @see org.nuxeo.sample.BookLibrary#getDoc()
      */
     @Override
+    @JsonIgnore
     public DocumentModel getDoc() {
         return doc;
     }
@@ -64,8 +70,10 @@ public class BookLibraryImpl implements BookLibrary {
     @Override
     public Book addBook(String name) throws ClientException {
         CoreSession session = doc.getCoreSession();
-        return session.createDocumentModel(doc.getPathAsString(), name,
-                Book.DOCTYPE).getAdapter(Book.class);
+        DocumentModel docBook = session.createDocumentModel(doc.getPathAsString(), name,
+                Book.DOCTYPE);
+        docBook.setPropertyValue("dc:title", name);
+        return docBook.getAdapter(Book.class);
     }
 
     /*
@@ -76,6 +84,40 @@ public class BookLibraryImpl implements BookLibrary {
     @Override
     public String getTitle() throws ClientException {
         return doc.getProperty("dc:title").getValue(String.class);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.nuxeo.sample.BookLibrary#getBooks()
+     */
+    @Override
+    public List<Book> getBooks() throws ClientException {
+        String query = String.format(
+                "SELECT * FROM %s WHERE ecm:path STARTSWITH '%s'",
+                Book.DOCTYPE, getDoc().getPathAsString());
+
+        List<Book> result = new ArrayList<>();
+        for(DocumentModel docBook : doc.getCoreSession().query(query)) {
+            result.add(docBook.getAdapter(Book.class));
+        }
+        return result;
+    }
+
+    /* (non-Javadoc)
+     * @see org.nuxeo.sample.BookLibrary#getBook(java.lang.String)
+     */
+    @Override
+    public Book getBook(String bookTitle) throws ClientException {
+        String query = String.format(
+                "SELECT * FROM %s WHERE ecm:path STARTSWITH '%s' AND dc:title='%s'",
+                Book.DOCTYPE, getDoc().getPathAsString(), bookTitle);
+        DocumentModelList docs = doc.getCoreSession().query(query);
+        if(docs.size() == 0) {
+            return null;
+        } else {
+            return docs.get(0).getAdapter(Book.class);
+        }
     }
 
 }

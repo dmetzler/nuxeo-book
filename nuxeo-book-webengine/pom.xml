@@ -12,7 +12,7 @@
   <artifactId>nuxeo-book-webengine</artifactId>
   <name>nuxeo-book-webengine</name>
   <description>
-    
+
   </description>
 
   <dependencies>
@@ -27,6 +27,12 @@
     <dependency>
       <groupId>org.nuxeo.ecm.webengine</groupId>
       <artifactId>nuxeo-webengine-base</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.nuxeo.sample.group</groupId>
+      <artifactId>nuxeo-book-core</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
@@ -60,5 +66,5 @@
       </plugin>
     </plugins>
   </build>
-  
+
 </project>

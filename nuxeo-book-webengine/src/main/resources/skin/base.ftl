@@ -43,10 +43,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">My Libraries</a>
+                    <a class="brand" href="${Context.modulePath}">My Libraries</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="${Context.modulePath}">Home</a></li>
                             <li><a href="#about">About</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->

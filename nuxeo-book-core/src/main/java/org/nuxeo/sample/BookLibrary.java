@@ -16,6 +16,8 @@
  */
 package org.nuxeo.sample;
 
+import java.util.List;
+
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.DocumentModel;
 
@@ -46,5 +48,14 @@ public interface BookLibrary {
      * @throws ClientException
      */
     public String getTitle() throws ClientException;
+
+
+    public List<Book> getBooks() throws ClientException;
+
+    /**
+     * @param bookTitle
+     * @return
+     */
+    public Book getBook(String bookTitle) throws ClientException;
 
 }

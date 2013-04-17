@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
+import org.nuxeo.ecm.core.model.NoSuchDocumentException;
 
 /**
  * @author dmetzler
@@ -39,5 +40,12 @@ public interface LibraryService {
      * @throws ClientException
      */
     BookLibrary createLibrary(String libraryTitle, CoreSession session) throws ClientException;
+
+    /**
+     * @param libraryTitle
+     * @return
+     * @throws NoSuchDocumentException
+     */
+    BookLibrary getLibrary(String libraryTitle, CoreSession session) throws ClientException;
 
 }

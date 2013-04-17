@@ -18,6 +18,7 @@ package org.nuxeo.sample;
 
 import java.util.Calendar;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.joda.time.DateTime;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.DocumentModel;
@@ -110,7 +111,9 @@ public class BookImpl implements Book {
      */
     @Override
     public int getRating() throws ClientException {
-        return doc.getProperty("bk:rating").getValue(Integer.class);
+        Integer value = doc.getProperty("bk:rating").getValue(Integer.class);
+
+        return value != null ? value : 0;
     }
 
     /*
@@ -141,6 +144,7 @@ public class BookImpl implements Book {
      * @see org.nuxeo.sample.Book#getDocument()
      */
     @Override
+    @JsonIgnore
     public DocumentModel getDocument() {
         return doc;
     }
@@ -152,5 +156,24 @@ public class BookImpl implements Book {
     public String getTitle() throws ClientException {
         return doc.getProperty("dc:title").getValue(String.class);
     }
+
+
+    /* (non-Javadoc)
+     * @see org.nuxeo.sample.Book#getDescription()
+     */
+    @Override
+    public String getDescription() throws ClientException {
+        return doc.getProperty("dc:description").getValue(String.class);
+    }
+
+    /* (non-Javadoc)
+     * @see org.nuxeo.sample.Book#setDescription(java.lang.String)
+     */
+    @Override
+    public void setDescription(String description) throws ClientException {
+        doc.setPropertyValue("dc:description", description);
+
+    }
+
 
 }

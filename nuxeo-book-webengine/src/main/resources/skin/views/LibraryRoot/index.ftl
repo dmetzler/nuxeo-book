@@ -9,33 +9,31 @@
 <div class="hero-unit">
     <h1>Hello, Welcome to our library</h1>
     <p>This is simple webengine project to show how it's easy to build web application on top of Nuxeo.</p>
-    <p>You just have to use the menu provided in the toolbar to navigate thru libraries<p>
-
 </div>
 
 
-<div style="margin: 10px 10px 10px 10px">
-<p>
-This is the view corresponding to your root object: ${This.class.simpleName}.
-</p>
+<div class="row">
 
-<p>
-You can find the code of this view in: src/main/resources/skin/views/${This.class.simpleName}
-</p>
+  <div class="span8">
+    <section>
+      <div class="page-header">
+        <h2>List of libraries</h2>
+      </div>
+      <ul>
+        <#list This.libraries as library>
+          <li><a href="${This.path}/${library.title}">${library.title}</a></li>
+        </#list>
+      </ul>
+    </section>
+  </div>
 
-<p>
-To render a view from an WebEngine object you should create @GET annotated method which is returning the view: getView("viewname") where <i>viewname</i> is the file name (without the ftl extension) in the views/ObjectName folder.
-</p>
-
-<p>
-In a view you can access the object instance owning the view using ${r"${This}"} variable or the request context using the ${r"${Context}"} variable.
-</p>
-
-<p>
-Also, you can use @block statements to create reusable layouts.
-</p>
-
+  <div class="span4">
+    <form class="well form-inline" action="${This.path}" method="post">
+      <legend>Create a new library</library>
+      <input name="title" placeholder="Enter library's title"/>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
 </div>
-
 </@block>
 </@extends>

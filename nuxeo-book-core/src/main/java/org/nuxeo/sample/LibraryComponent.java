@@ -89,7 +89,8 @@ public class LibraryComponent extends DefaultComponent implements
      * @param libraryTitle
      * @return
      */
-    private BookLibrary getLibrary(String libraryTitle, CoreSession session)
+    @Override
+    public BookLibrary getLibrary(String libraryTitle, CoreSession session)
             throws ClientException {
         String query = String.format(
                 "SELECT * FROM %s WHERE ecm:currentLifeCycleState != 'deleted' AND ecm:isCheckedInVersion = 0 AND dc:title = '%s'",
@@ -112,6 +113,7 @@ public class LibraryComponent extends DefaultComponent implements
             throws ClientException {
         String rootPath = "/default-domain/libraryRoot";
         if (!session.exists(new PathRef(rootPath))) {
+
             UnrestrictedSessionRunner rootCreator = new UnrestrictedSessionRunner(
                     session) {
 

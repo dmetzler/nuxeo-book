@@ -64,6 +64,10 @@ public interface Book {
      */
     int getRating() throws ClientException;;
 
+    String getDescription() throws ClientException;
+
+    void setDescription(String description) throws ClientException;
+
     /**
      * @return
      */
@@ -84,6 +88,7 @@ public interface Book {
      * @return
      * @throws ClientException
      */
-    String getTitle() throws ClientException;;
+    String getTitle() throws ClientException;
+
 
 }

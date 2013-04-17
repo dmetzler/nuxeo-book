@@ -17,6 +17,7 @@
 
 package org.nuxeo.sample.test;
 
+import static org.fest.assertions.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -49,10 +50,10 @@ public class BookLibraryTest {
     @Inject
     CoreSession session;
 
-
     @Test
     public void iCanCreateABookLibrary() throws Exception {
-        DocumentModel doc = session.createDocumentModel("/", "library", "BookLibrary");
+        DocumentModel doc = session.createDocumentModel("/", "library",
+                "BookLibrary");
         doc.setPropertyValue("dc:title", "My library");
 
         doc = session.createDocument(doc);
@@ -60,18 +61,17 @@ public class BookLibraryTest {
 
         assertTrue(session.exists(doc.getRef()));
 
-
-
     }
 
     @Test
     public void iCanAddBookToBookLibrary() throws Exception {
-        DocumentModel doc = session.createDocumentModel("/", "library", "BookLibrary");
+        DocumentModel doc = session.createDocumentModel("/", "library",
+                "BookLibrary");
         doc.setPropertyValue("dc:title", "My library");
         doc = session.createDocument(doc);
         session.save();
 
-        doc = session.createDocumentModel("/library","myBook","Book");
+        doc = session.createDocumentModel("/library", "myBook", "Book");
         doc.setPropertyValue("dc:title", "My book");
         doc = session.createDocument(doc);
         session.save();
@@ -80,11 +80,11 @@ public class BookLibraryTest {
 
     @Test
     public void iHaveAnAdapterOnLibrary() throws Exception {
-        DocumentModel doc = session.createDocumentModel("/", "library", "BookLibrary");
+        DocumentModel doc = session.createDocumentModel("/", "library",
+                "BookLibrary");
         BookLibrary library = doc.getAdapter(BookLibrary.class);
 
         assertNotNull(library);
-
 
         library.setTitle("My library");
 
@@ -92,13 +92,16 @@ public class BookLibraryTest {
 
         assertEquals("My library", library.getTitle());
 
-        Book book = library.addBook("myBook");
-        book.setTitle("My Book");
+        assertThat(library.getBooks().size()).isEqualTo(0);
+
+        Book book = library.addBook("My Book");
+        assertThat(book.getTitle()).isEqualTo("My Book");
+
         session.createDocument(book.getDocument());
+        session.save();
 
-
+        assertThat(library.getBooks().size()).isEqualTo(1);
 
     }
-
 
 }
