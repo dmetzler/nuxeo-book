@@ -16,15 +16,20 @@
  */
 package org.nuxeo.sample;
 
+import java.io.IOException;
+
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.rest.DocumentObject;
+import org.nuxeo.ecm.webengine.WebException;
 import org.nuxeo.ecm.webengine.forms.FormData;
 import org.nuxeo.ecm.webengine.model.Resource;
 import org.nuxeo.ecm.webengine.model.WebObject;
@@ -40,6 +45,17 @@ public class LibraryObject extends DocumentObject {
 
     public BookLibrary getLibrary() {
         return doc.getAdapter(BookLibrary.class);
+    }
+
+    @GET
+    @Produces("application/json")
+    public Object doGetJSon() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(getLibrary());
+        } catch (IOException e) {
+            throw WebException.wrap(e);
+        }
     }
 
     @Override
