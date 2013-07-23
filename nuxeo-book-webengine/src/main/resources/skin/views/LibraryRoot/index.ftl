@@ -19,7 +19,7 @@
       <div class="page-header">
         <h2>List of libraries</h2>
       </div>
-      <ul>
+      <ul id="libraryList">
         <#list This.libraries as library>
           <li><a href="${This.path}/${library.title}">${library.title}</a></li>
         </#list>
@@ -28,7 +28,7 @@
   </div>
 
   <div class="span4">
-    <form class="well form-inline" action="${This.path}" method="post">
+    <form name="createLibrary" class="well form-inline" action="${This.path}" method="post">
       <legend>Create a new library</library>
       <input name="title" placeholder="Enter library's title"/>
       <button type="submit" class="btn btn-primary">Create</button>
