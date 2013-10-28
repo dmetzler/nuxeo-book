@@ -5,13 +5,14 @@
   <parent>
     <groupId>org.nuxeo.ecm.platform</groupId>
     <artifactId>nuxeo-features-parent</artifactId>
-    <version>5.7-SNAPSHOT</version>
+    <version>5.7.3</version>
   </parent>
 
   <groupId>org.nuxeo.sample.book</groupId>
   <artifactId>nuxeo-book-parent</artifactId>
   <packaging>pom</packaging>
   <name>Nuxeo Book :: Parent</name>
+  <version>5.7-SNAPSHOT</version>
   <description>
 
   </description>
@@ -21,6 +22,29 @@
     <module>nuxeo-book-core</module>
     <module>nuxeo-book-webengine</module>
   </modules>
+  
+  <repositories>
+        <repository>
+          <id>public</id>
+          <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>public-snapshot</id>
+          <url>http://maven.nuxeo.org/nexus/content/groups/public-snapshot</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
 
   <dependencyManagement>
     <dependencies>

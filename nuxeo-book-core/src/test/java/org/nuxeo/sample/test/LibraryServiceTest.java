@@ -16,7 +16,7 @@
  */
 package org.nuxeo.sample.test;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class LibraryServiceTest {
     @Test
     public void iCanCreateAndFetchAllLibraries() throws Exception {
         List<BookLibrary> libraries = ls.getAllLibraries(session);
-
+        ls.
         assertThat(libraries).isNotNull();
         assertThat(libraries.size()).isEqualTo(0);
 
