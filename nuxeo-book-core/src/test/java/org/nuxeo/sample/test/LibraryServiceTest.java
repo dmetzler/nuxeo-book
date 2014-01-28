@@ -54,7 +54,6 @@ public class LibraryServiceTest {
     @Test
     public void iCanCreateAndFetchAllLibraries() throws Exception {
         List<BookLibrary> libraries = ls.getAllLibraries(session);
-        ls.
         assertThat(libraries).isNotNull();
         assertThat(libraries.size()).isEqualTo(0);
 
