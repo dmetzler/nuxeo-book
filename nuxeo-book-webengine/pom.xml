@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.nuxeo.sample.book</groupId>
     <artifactId>nuxeo-book-parent</artifactId>
-    <version>5.7-SNAPSHOT</version>
+    <version>7.10</version>
   </parent>
 
   <artifactId>nuxeo-book-webengine</artifactId>
@@ -15,10 +15,6 @@
   </description>
 
   <dependencies>
-    <dependency>
-      <groupId>javax.ws.rs</groupId>
-      <artifactId>jsr311-api</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm.webengine</groupId>
       <artifactId>nuxeo-webengine-core</artifactId>
@@ -31,11 +27,6 @@
     <dependency>
       <groupId>org.nuxeo.sample.book</groupId>
       <artifactId>nuxeo-book-core</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>osgi-core</artifactId>
     </dependency>
 
     <dependency>

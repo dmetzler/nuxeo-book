@@ -3,19 +3,23 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.nuxeo.ecm.platform</groupId>
-    <artifactId>nuxeo-features-parent</artifactId>
-    <version>5.7.3</version>
+    <groupId>org.nuxeo</groupId>
+    <artifactId>nuxeo-addons-parent</artifactId>
+    <version>7.10</version>
   </parent>
 
   <groupId>org.nuxeo.sample.book</groupId>
   <artifactId>nuxeo-book-parent</artifactId>
   <packaging>pom</packaging>
-  <name>Nuxeo Book :: Parent</name>
-  <version>5.7-SNAPSHOT</version>
+  <name>Nuxeo Book :: Parent</name>  
   <description>
 
   </description>
+
+
+  <properties>
+    <nuxeo.version>7.10</nuxeo.version>
+  </properties>
 
 
   <modules>
@@ -48,6 +52,13 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.nuxeo.ecm.distribution</groupId>
+        <artifactId>nuxeo-distribution</artifactId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${nuxeo.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.nuxeo.sample.book</groupId>
         <artifactId>nuxeo-book-core</artifactId>

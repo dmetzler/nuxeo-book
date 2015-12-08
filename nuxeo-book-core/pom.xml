@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.nuxeo.sample.book</groupId>
     <artifactId>nuxeo-book-parent</artifactId>
-    <version>5.7-SNAPSHOT</version>
+    <version>7.10</version>
   </parent>
 
   <artifactId>nuxeo-book-core</artifactId>
@@ -47,18 +47,24 @@
     </dependency>
 
     <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>osgi-core</artifactId>
-    </dependency>
- 
-    <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-asl</artifactId>
     </dependency>
 
     <dependency>
        <groupId>org.assertj</groupId>
-       <artifactId>assertj-core</artifactId>       
+       <artifactId>assertj-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-platform-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.runtime</groupId>
+      <artifactId>nuxeo-runtime-test</artifactId>
+      <scope>test</scope>
     </dependency>
 
   </dependencies>

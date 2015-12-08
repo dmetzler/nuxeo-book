@@ -33,11 +33,9 @@ import org.nuxeo.ecm.webengine.WebException;
 import org.nuxeo.ecm.webengine.forms.FormData;
 import org.nuxeo.ecm.webengine.model.Resource;
 import org.nuxeo.ecm.webengine.model.WebObject;
-import org.nuxeo.ecm.webengine.model.exceptions.WebDocumentException;
 
 /**
  * @author dmetzler
- *
  */
 @WebObject(type = "Library")
 @Produces("text/html;charset=UTF-8")
@@ -61,32 +59,23 @@ public class LibraryObject extends DocumentObject {
     @Override
     @POST
     public Response doPost() {
-        try {
-            FormData form = getContext().getForm();
-            String title = form.getString("title");
-            Book book = getLibrary().addBook(title);
-            book.setAuthor(form.getString("author"));
-            CoreSession session = getContext().getCoreSession();
-            session.createDocument(book.getDocument());
+        FormData form = getContext().getForm();
+        String title = form.getString("title");
+        Book book = getLibrary().addBook(title);
+        book.setAuthor(form.getString("author"));
+        CoreSession session = getContext().getCoreSession();
+        session.createDocument(book.getDocument());
 
-            return redirect(getPath());
-        } catch (ClientException e) {
-            throw new WebDocumentException(e);
-        }
+        return redirect(getPath());
 
     }
 
     @Override
     @Path("{bookTitle}")
-    public Resource traverse(@PathParam("bookTitle")
-    String bookTitle) {
+    public Resource traverse(@PathParam("bookTitle") String bookTitle) {
         Book book;
-        try {
-            book = getLibrary().getBook(bookTitle);
-            return newObject("Book", book.getDocument());
-        } catch (ClientException e) {
-            throw new WebDocumentException(e);
-        }
+        book = getLibrary().getBook(bookTitle);
+        return newObject("Book", book.getDocument());
 
     }
 

@@ -17,7 +17,7 @@
 
 package org.nuxeo.sample;
 
-import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
 
@@ -29,12 +29,9 @@ import javax.ws.rs.Produces;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.nuxeo.ecm.core.api.Blob;
-import org.nuxeo.ecm.core.api.ClientException;
-import org.nuxeo.ecm.core.api.impl.blob.InputStreamBlob;
-import org.nuxeo.ecm.webengine.WebException;
+import org.nuxeo.ecm.core.api.impl.blob.StringBlob;
 import org.nuxeo.ecm.webengine.forms.FormData;
 import org.nuxeo.ecm.webengine.model.WebObject;
-import org.nuxeo.ecm.webengine.model.exceptions.WebDocumentException;
 import org.nuxeo.ecm.webengine.model.exceptions.WebResourceNotFoundException;
 import org.nuxeo.ecm.webengine.model.impl.ModuleRoot;
 import org.nuxeo.runtime.api.Framework;
@@ -57,63 +54,47 @@ public class LibraryRoot extends ModuleRoot {
     @GET
     @Produces("application/json;charset=UTF-8")
     public Object doGetJson() {
-        try {
-            List<BookLibrary> allLibraries = Framework.getLocalService(LibraryService.class).getAllLibraries(getContext().getCoreSession());
-            return toJsonBlob(allLibraries);
+        List<BookLibrary> allLibraries = Framework.getLocalService(LibraryService.class)
+                                                  .getAllLibraries(getContext().getCoreSession());
+        return toJsonBlob(allLibraries);
 
-        } catch (ClientException e) {
-            throw new WebDocumentException(e);
-        }
     }
 
-    protected Blob toJsonBlob(Object object) throws ClientException {
+    protected Blob toJsonBlob(Object object) {
         ObjectMapper mapper = new ObjectMapper();
         StringWriter writer = new StringWriter();
         try {
             mapper.writeValue(writer, object);
-            return new InputStreamBlob(new ByteArrayInputStream(
-                    writer.toString().getBytes("UTF-8")), "application/json");
-        } catch (Exception e) {
-            throw new ClientException(e);
+            return new StringBlob(writer.toString());
+        } catch (IOException e) {
+            return new StringBlob("");
         }
     }
 
-
-    public List<BookLibrary> getLibraries() throws ClientException {
+    public List<BookLibrary> getLibraries() {
         LibraryService ls = Framework.getLocalService(LibraryService.class);
         return ls.getAllLibraries(getContext().getCoreSession());
     }
 
     @POST
     public Object doCreateLibrary() {
-        try {
-            FormData form = getContext().getForm();
-            LibraryService ls = Framework.getLocalService(LibraryService.class);
-            ls.createLibrary(form.getString("title"),
-                    getContext().getCoreSession());
-            return redirect(getPath());
-        } catch (ClientException e) {
-            return WebException.wrap(e);
-        }
+        FormData form = getContext().getForm();
+        LibraryService ls = Framework.getLocalService(LibraryService.class);
+        ls.createLibrary(form.getString("title"), getContext().getCoreSession());
+        return redirect(getPath());
 
     }
 
     @Path("{libraryTitle}")
-    public Object getLibrary(@PathParam("libraryTitle")
-    String libraryTitle) {
-        try {
-            LibraryService ls = Framework.getLocalService(LibraryService.class);
-            BookLibrary library = ls.getLibrary(libraryTitle,
-                    getContext().getCoreSession());
+    public Object getLibrary(@PathParam("libraryTitle") String libraryTitle) {
+        LibraryService ls = Framework.getLocalService(LibraryService.class);
+        BookLibrary library = ls.getLibrary(libraryTitle, getContext().getCoreSession());
 
-            if (library == null) {
-                return new WebResourceNotFoundException("Library not found");
-            }
-
-            return newObject("Library", library.getDoc());
-        } catch (ClientException e) {
-            throw WebException.wrap(e);
+        if (library == null) {
+            return new WebResourceNotFoundException("Library not found");
         }
+
+        return newObject("Library", library.getDoc());
 
     }
 
