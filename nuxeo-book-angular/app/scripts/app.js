@@ -4,7 +4,7 @@
 angular.module('nuxeoBookAngularApp', ["nxSession"])
   .value("defaultSchemas", ["dublincore","book"])
   .factory("nxSession", function(nxSessionFactory) {
-    return nxSessionFactory({apiRootPath:"nuxeo/site/api"})
+    return nxSessionFactory({apiRootPath:"nuxeo/site/api/v1"})
   })
 
   //Routing configuration

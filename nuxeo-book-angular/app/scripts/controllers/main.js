@@ -2,7 +2,7 @@
 
 angular.module('nuxeoBookAngularApp')
   .controller('ListCtrl', function ($scope, nxSession, defaultSchemas) {
-    $scope.books = nxSession.getDocument("/books").getChildren(defaultSchemas);
+    $scope.books = nxSession.getDocument("/default-domain/libraryRoot/books").getChildren(defaultSchemas);
   })
 
   .controller("EditCtrl", function($scope, nxSession, $routeParams, $location, defaultSchemas) {
@@ -25,8 +25,11 @@ angular.module('nuxeoBookAngularApp')
 
     $scope.save = function() {      
       $scope.doc.name = $scope.doc.properties["dc:title"];
-      nxSession.createDocument("/books", $scope.doc)
-      $location.path("/")
+      nxSession.createDocument("/default-domain/libraryRoot/books", $scope.doc).then(
+        function() {
+          $location.path("/")    
+        })
+      
     }
     
   });    
